@@ -21,11 +21,7 @@
     $app->get("/", function() use ($app) {
         return $app['twig']->render(
             'stylists.html.twig',
-            array(
-                'isEdit' => false,
-                'edit_stylist' => new Stylist,
-                'stylists' => Stylist::getAll()
-            )
+            array('edit_stylist' => new Stylist, 'stylists' => Stylist::getAll())
         );
     });
 
@@ -35,16 +31,17 @@
 
         return $app['twig']->render(
             'stylists.html.twig',
-            array(
-                'isEdit' => false,
-                'edit_stylist' => new Stylist,
-                'stylists' => Stylist::getAll()
-            )
+            array('edit_stylist' => new Stylist, 'stylists' => Stylist::getAll())
         );
     });
 
     $app->get("/get/stylist/{id}/edit", function($id) use ($app) {
-        return 'To Do';
+        $stylist = Stylist::findById($id);
+
+        return $app['twig']->render(
+            'stylists.html.twig',
+            array('edit_stylist' => $stylist, 'stylists' => Stylist::getAll())
+        );
     });
 
     $app->patch("/patch/stylist/{id}", function($id) use ($app) {
