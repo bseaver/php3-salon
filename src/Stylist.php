@@ -24,7 +24,7 @@
 
         function getContactInfo()
         {
-            return $this->link;
+            return $this->contact_info;
         }
 
         function setId($id)
