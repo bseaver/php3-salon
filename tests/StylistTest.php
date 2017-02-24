@@ -63,5 +63,33 @@ class CuisineTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($stylist1, $stylist3);
     }
 
+    function test_Stylist_update()
+    {
+        // Arrange
+        $stylist1 = new Stylist("John O'Hanlin", 'john@hairy.com');
+        $new_name = "John O'Malley";
+        $new_contact_info = 'john@hair.net';
+
+        $stylist2 = new Stylist('Alison', '555-1212');
+        $stylist1->save();
+        $stylist2->save();
+
+        // Act
+        $stylist1->update($new_name, $new_contact_info);
+
+        $updated_name = '';
+        $updated_contact_info = '';
+        $stylists = Stylist::getAll();
+        foreach ($stylists as $stylist) {
+            if ($stylist->getId() == $stylist1->getId()) {
+                $updated_name = $stylist->getName();
+                $updated_contact_info = $stylist->getContactInfo();
+            }
+        }
+
+        // Assert
+        $this->assertEquals($new_name . '+' . $new_contact_info, $updated_name . '+' . $updated_contact_info);
+    }
+
 }
 ?>
