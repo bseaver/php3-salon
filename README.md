@@ -58,6 +58,11 @@ The emphasis is on back-end functionality.  The front end will be "bare bones".
 ## Implementation Plan
 
 * From mySQL prompt, create database structure of hair_salon (hair_salon.sql)
+  * CREATE DATABASE hair_salon;
+  * USE hair_salon;
+  * CREATE TABLE stylists (id SERIAL PRIMARY KEY, name varchar(255), contact_info varchar(255));
+  * CREATE TABLE clients (id SERIAL PRIMARY KEY, name varchar(255), contact_info varchar(255), stylist_id BIGINT);
+  
 * Duplicate hair_salon to hair_salon_test (hair_salon_test.sql)
 * Install PHPUnit, Silex and Twig dependencies (composer.json composer.log, .gitignore)
 * Create empty class and methods for Stylist (src/Stylist.php)
