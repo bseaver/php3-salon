@@ -12,7 +12,7 @@ $password = 'root';
 $DB = new PDO($server, $username, $password);
 
 
-class CuisineTest extends PHPUnit_Framework_TestCase
+class StylistTest extends PHPUnit_Framework_TestCase
 {
     protected function tearDown()
     {
@@ -101,7 +101,7 @@ class CuisineTest extends PHPUnit_Framework_TestCase
 
         // Act
         $stylist1->delete();
-        
+
         // Assert
         $this->assertEquals([$stylist2], Stylist::getAll());
     }
