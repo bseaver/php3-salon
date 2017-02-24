@@ -19,7 +19,14 @@
     Request::enableHttpMethodParameterOverride();
 
     $app->get("/", function() use ($app) {
-        return "Hello Hair Salon";
+        return $app['twig']->render(
+            'stylists.html.twig',
+            array(
+                'isEdit' => false,
+                'edit_stylist' => new Stylist,
+                'stylists' => Stylist::getAll()
+            )
+        );
     });
 
     $app->post("/post/stylist", function() use ($app) {
@@ -38,7 +45,11 @@
         return 'To Do';
     });
 
-    $app->delete("/delete/stylist/all", function($id) use ($app) {
+    $app->delete("/delete/stylists", function() use ($app) {
+        return 'To Do';
+    });
+
+    $app->get("/get/clients/{stylist_id}", function($stylist_id) use ($app) {
         return 'To Do';
     });
 

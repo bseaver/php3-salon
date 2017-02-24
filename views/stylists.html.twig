@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block page %}
+    {% if stylists is not empty %}
+        <h3>Stylists On File:</h3>
+        <br>
+
+        <table class="table table-striped">
+            <thead>
+                <th>Name</th>
+                <th>Contact Info</th>
+                <th>Edit</th>
+                <th>Clients</th>
+                <th>Delete Including Associated Clients</th>
+            </thead>
+
+            <tbody>
+                {% for stylist in stylist %}
+                    <td>{{ stylist.getName }}</td>
+                    <td>{{ stylist.getContactInfo }}</td>
+                    <td>
+                        <form action='/get/stylist/{{ stylist.getId }}/edit' method='get'>
+                            <button type='submit' class='btn btn-xs btn-info'>Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action='/get/clients/{{ stylist.getId }}' method='get'>
+                            <button type='submit' class='btn btn-xs btn-primary'>Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        <form action='/delete/stylist/{{ stylist.getId }}' method='post'>
+                            <input name='_method' value='delete' hidden>
+                            <button type='submit' class='btn btn-xs btn-warning'>Delete</button>
+                        </form>
+                    </td>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <br>
+    <br>
+
+    {% if isEdit %}
+        <h3>Edit Existing Stylist</h3>
+    {% else %}
+        <h3>Enter New Stylist</h3>
+    {% endif %}
+
+    <form
+        {% if isEdit %}
+            action='/patch/stylist/{{ edit_stylist.getId }}'
+        {% else %}
+            action='/post/stylist'
+        {% endif %}
+        method='post'
+    >
+
+        {% if isEdit %}
+            <input name='_method' value='patch' hidden>
+        {% endif %}
+
+        <div class='form-group'>
+            <label for='stylist_name'>Name of Stylist</label>
+            <input
+                required type='text' name='stylist_name' class='form-control'
+                value='{{ edit_stylist.getName }}'
+            >
+        </div>
+
+        <div class='form-group'>
+            <label for='stylist_contact_info'>Contact Info</label>
+            <input
+                required type='text' name='stylist_contact_info' class='form-control'
+                value='{{ edit_stylist.getContactInfo }}'
+            >
+        </div>
+        <button type='submit' class='btn btn-info'>Submit</button>
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <form action='/delete/stylists' method='post'>
+        <input name='_method' value='delete' hidden>
+        <button type='submit' class='btn btn-xs btn-danger'>Danger --- Delete All Data --- Danger!</button>
+    </form>
+{% endblock %}
