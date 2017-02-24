@@ -56,39 +56,41 @@
 
         function save()
         {
-            // $name = addslashes($this->getName());
-            // $contact_info = addslashes($this->getContactInfo());
-            //
-            // $GLOBALS['DB']->exec("INSERT INTO clients
-            //     (name, contact_info, stylist_id) VALUES
-            //     ('$name', '$contact_info', $this->getStylistId());"
-            // );
-            // $this->id = $GLOBALS['DB']->lastInsertId();
+            $name = addslashes($this->getName());
+            $contact_info = addslashes($this->getContactInfo());
+
+            $GLOBALS['DB']->exec("INSERT INTO clients
+                (name, contact_info, stylist_id) VALUES
+                ('$name', '$contact_info', {$this->getStylistId()});"
+            );
+            $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        static function getAll($stylist_id)
+        static function getAll($stylist_id = null)
         {
-            // $output = array();
-            // $results = $GLOBALS['DB']->query(
-            //     "SELECT * FROM clients
-            //     WHERE stylist_id = $stylist_id
-            //     ORDER BY name;"
-            // );
-            // foreach ($results as $result) {
-            //     $client = new Client(
-            //         $result['name'],
-            //         $result['contact_info'],
-            //         $result['stylist_id'],
-            //         $result['id']
-            //     );
-            //     array_push($output, $client);
-            // }
-            // return $output;
+            if ($stylist_id) {
+                $query = "SELECT * FROM clients WHERE stylist_id = $stylist_id ORDER BY name;";
+            } else {
+                $query = "SELECT * FROM clients ORDER BY name;";
+            }
+
+            $output = array();
+            $results = $GLOBALS['DB']->query($query);
+            foreach ($results as $result) {
+                $client = new Client(
+                    $result['name'],
+                    $result['contact_info'],
+                    $result['stylist_id'],
+                    $result['id']
+                );
+                array_push($output, $client);
+            }
+            return $output;
         }
 
         static function deleteAll()
         {
-            // $GLOBALS['DB']->exec("DELETE FROM clients;");
+            $GLOBALS['DB']->exec("DELETE FROM clients;");
         }
 
         static function deleteAllByStylist($stylist_id)
