@@ -33,7 +33,7 @@ class CuisineTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('James-555-1212', $stylist2->getName() . '-' . $stylist2->getContactInfo());
     }
 
-    function test_Stylist_save_getAll_delete_All()
+    function test_Stylist_save_getAll_deleteAll()
     {
         // Arrange
         $stylist1 = new Stylist('James', '555-1212');
@@ -46,6 +46,21 @@ class CuisineTest extends PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertEquals([$stylist2, $stylist1], $all_stylists);
+    }
+
+    function test_Stylist_findById()
+    {
+        // Arrange
+        $stylist1 = new Stylist('John', 'john@hairy.com');
+        $stylist2 = new Stylist('Alison', '555-1212');
+        $stylist1->save();
+        $stylist2->save();
+
+        // Act
+        $stylist3 = Stylist::findById( $stylist1->getId() );
+
+        // Assert
+        $this->assertEquals($stylist1, $stylist3);
     }
 
 }
