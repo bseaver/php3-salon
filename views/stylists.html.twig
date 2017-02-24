@@ -32,7 +32,13 @@
                         <td>
                             <form action='/delete/stylist/{{ stylist.getId }}' method='post'>
                                 <input name='_method' value='delete' hidden>
-                                <button type='submit' class='btn btn-xs btn-warning'>Delete Along With Clients</button>
+                                <button type='submit' class='btn btn-xs btn-warning'
+                                    {% if edit_stylist.getId == stylist.getId %}
+                                        disabled
+                                    {% endif %}
+                                >
+                                    Delete Along With Clients
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -44,14 +50,14 @@
     <br>
     <br>
 
-    {% if isEdit %}
-        <h3>Edit Existing Stylist</h3>
+    {% if edit_stylist.getId %}
+        <h3>Edit Existing Stylist:</h3>
     {% else %}
-        <h3>Enter New Stylist</h3>
+        <h3>Enter New Stylist:</h3>
     {% endif %}
 
     <form
-        {% if isEdit %}
+        {% if edit_stylist.getId %}
             action='/patch/stylist/{{ edit_stylist.getId }}'
         {% else %}
             action='/post/stylist'
@@ -59,8 +65,9 @@
         method='post'
     >
 
-        {% if isEdit %}
+        {% if edit_stylist.getId %}
             <input name='_method' value='patch' hidden>
+            <input name='stylist_id' value='{{ edit_stylist.getId }}' hidden>
         {% endif %}
 
         <div class='form-group'>
@@ -86,6 +93,12 @@
     <br>
     <form action='/delete/stylists' method='post'>
         <input name='_method' value='delete' hidden>
-        <button type='submit' class='btn btn-xs btn-danger'>Delete All Data --- Warning!</button>
+        <button type='submit' class='btn btn-xs btn-danger'
+            {% if edit_stylist.getId %}
+                disabled
+            {% endif %}
+        >
+            Delete All Data --- Warning!
+        </button>
     </form>
 {% endblock %}
