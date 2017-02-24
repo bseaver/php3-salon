@@ -57,9 +57,9 @@ The emphasis is on back-end functionality.  The front end will be "bare bones".
 
 ## Implementation Plan
 
-* Install PHPUnit, Silex and Twig dependencies (composer.json composer.log, .gitignore)
 * From mySQL prompt, create database structure of hair_salon (hair_salon.sql)
 * Duplicate hair_salon to hair_salon_test (hair_salon_test.sql)
+* Install PHPUnit, Silex and Twig dependencies (composer.json composer.log, .gitignore)
 * Create empty class and methods for Stylist (src/Stylist.php)
 * Iterate building StylistTest class tests and implementing methods in Stylist (tests/StylistTest.php, src/Stylist.php)
 * Initial Silex framework with "Hello Hair Salon" on home page (web/index.php, app/app.php)
