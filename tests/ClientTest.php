@@ -15,13 +15,13 @@ $DB = new PDO($server, $username, $password);
 
 class ClientTest extends PHPUnit_Framework_TestCase
 {
-    // protected function tearDown()
-    // {
-    //     Stylist::deleteAll();
-    //     Client::deleteAll();
-    // }
+    protected function tearDown()
+    {
+        Stylist::deleteAll();
+        Client::deleteAll();
+    }
 
-    function test_Stylist_get_set_construct()
+    function test_Client_get_set_construct()
     {
         // Arrange
         $stylist1 = new Client('James', '555-1212', 1);
@@ -38,6 +38,28 @@ class ClientTest extends PHPUnit_Framework_TestCase
             $stylist2->getName() . '-' . $stylist2->getContactInfo() . '-' . $stylist2->getStylistId()
         );
     }
+
+    function test_Client_save_getAll_deleteAll()
+    {
+        // Arrange
+        $stylist1 = new Stylist('James', '555-1212');
+        $stylist2 = new Stylist('Alison', '555-1212');
+        $stylist1->save();
+        $stylist2->save();
+
+        $client1 = new Client('Tony','444-1111', $stylist1->getId());
+        $client2 = new Client('Mike','555-1111', $stylist2->getId());
+
+        // Act
+        $client1->save();
+        $client2->save();
+
+        $all_clients = Client::getAll();
+
+        // Assert
+        $this->assertEquals([$client2, $client2], $all_clients);
+    }
+
 
 
 }
