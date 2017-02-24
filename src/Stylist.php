@@ -89,7 +89,15 @@
 
         function update($new_name, $new_contact_info)
         {
+            $this->setName(addslashes($new_name));
+            $this->setContactInfo(addslashes($new_contact_info));
 
+            $GLOBALS['DB']->exec(
+                "UPDATE stylists SET
+                    name = '{$this->getName()}',
+                    contact_info = '{$this->getContactInfo()}'
+                WHERE id = {$this->getId()};"
+            );
         }
 
         function delete()
