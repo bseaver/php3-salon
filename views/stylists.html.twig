@@ -33,7 +33,7 @@
                             <form action='/delete/stylist/{{ stylist.getId }}' method='post'>
                                 <input name='_method' value='delete' hidden>
                                 <button type='submit' class='btn btn-xs btn-warning'
-                                    {% if edit_stylist.getId == stylist.getId %}
+                                    {% if edit_stylist.getId %}
                                         disabled
                                     {% endif %}
                                 >
