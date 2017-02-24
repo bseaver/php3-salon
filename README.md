@@ -44,7 +44,9 @@ The emphasis is on back-end functionality.  The front end will be "bare bones".
 * PHPUnit
 * Silex
 * Twig
+* Bootstrap
 * HTML
+* CSS
 * Git
 
 ## Copyright (c)
@@ -61,10 +63,10 @@ The emphasis is on back-end functionality.  The front end will be "bare bones".
 * Create empty class and methods for Stylist (src/Stylist.php)
 * Iterate building StylistTest class tests and implementing methods in Stylist (tests/StylistTest.php, src/Stylist.php)
 * Initial Silex framework with "Hello Hair Salon" on home page (web/index.php, app/app.php)
-* Iterate building Twig template(s) and routes to support all back-end Stylist functionality (views/, app/app.php))
+* Iterate building Twig template(s) and routes to support all back-end Stylist functionality (views/, app/app.php)
 * Create empty class and methods for Client (src/Client.php)
 * Iterate building ClientTest class tests and implementing methods in Client (tests/ClientTest.php, src/Client.php)
-* Iterate building Twig template(s) and routes to support all back-end Client functionality (views/, app/app.php))
+* Iterate building Twig template(s) and routes to support all back-end Client functionality (views/, app/app.php)
 * Re-export hair_salon database this time including sample data (hair_salon.sql)
 
 * End specifications
