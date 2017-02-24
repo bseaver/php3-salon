@@ -29,17 +29,17 @@
 
         function setId($id)
         {
-            // $this->id = (int) $id;
+            $this->id = (int) $id;
         }
 
         function setName($new_name)
         {
-            // $this->name = (string) $new_name;
+            $this->name = (string) $new_name;
         }
 
         function setContactInfo($new_contact_info)
         {
-            // $this->contact_info = (string) $new_contact_info;
+            $this->contact_info = (string) $new_contact_info;
         }
 
         function save()
