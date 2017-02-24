@@ -65,7 +65,12 @@
     });
 
     $app->delete("/delete/stylists", function() use ($app) {
-        return 'To Do';
+        Stylist::deleteAll();
+
+        return $app['twig']->render(
+            'stylists.html.twig',
+            array('edit_stylist' => new Stylist, 'stylists' => Stylist::getAll())
+        );
     });
 
     $app->get("/get/clients/{stylist_id}", function($stylist_id) use ($app) {
