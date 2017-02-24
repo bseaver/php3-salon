@@ -30,7 +30,17 @@
     });
 
     $app->post("/post/stylist", function() use ($app) {
-        return 'To Do';
+        $stylist = new Stylist($_POST['stylist_name'], $_POST['stylist_contact_info']);
+        $stylist->save();
+
+        return $app['twig']->render(
+            'stylists.html.twig',
+            array(
+                'isEdit' => false,
+                'edit_stylist' => new Stylist,
+                'stylists' => Stylist::getAll()
+            )
+        );
     });
 
     $app->get("/get/stylist/{id}/edit", function($id) use ($app) {
