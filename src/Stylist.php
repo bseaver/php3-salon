@@ -76,7 +76,15 @@
 
         static function findById($id)
         {
-
+            $results = $GLOBALS['DB']->query("SELECT * FROM stylists WHERE id = $id;");
+            foreach ($results as $result) {
+                $stylist = new Stylist(
+                    $result['name'],
+                    $result['contact_info'],
+                    $result['id']
+                );
+            }
+            return $stylist;
         }
 
         function update($new_name, $new_contact_info)
