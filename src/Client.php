@@ -103,16 +103,16 @@
 
         static function findById($id)
         {
-            // $results = $GLOBALS['DB']->query("SELECT * FROM clients WHERE id = $id;");
-            // foreach ($results as $result) {
-            //     $stylist = new Stylist(
-            //         $result['name'],
-            //         $result['contact_info'],
-            //         $result['stylist_id'],
-            //         $result['id']
-            //     );
-            // }
-            // return $stylist;
+            $results = $GLOBALS['DB']->query("SELECT * FROM clients WHERE id = $id;");
+            foreach ($results as $result) {
+                $client = new Client(
+                    $result['name'],
+                    $result['contact_info'],
+                    $result['stylist_id'],
+                    $result['id']
+                );
+            }
+            return $client;
         }
 
         function update($new_name, $new_contact_info, $new_stylist_id)
