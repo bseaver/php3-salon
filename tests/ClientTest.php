@@ -39,7 +39,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    function test_Client_getAll_stylist_id()
+    function test_Client_getAll_stylist_id_deleteAll()
     {
         // Arrange
         $stylist1 = new Stylist('James', '555-1212');
@@ -49,17 +49,14 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
         $client1 = new Client('Tony','444-1111', $stylist1->getId());
         $client2 = new Client('Mike','555-1111', $stylist2->getId());
-        $client3 = new Client('Francy','555-2222', $stylist1->getId());
 
         // Act
         $client1->save();
         $client2->save();
-        $client3->save();
-
-        $all_clients = Client::getAll($stylist1->getId());
+        $all_clients = Client::getAll();
 
         // Assert
-        $this->assertEquals([$client3, $client1], $all_clients);
+        $this->assertEquals([$client2, $client1], $all_clients);
     }
 
 
