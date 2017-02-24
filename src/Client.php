@@ -36,22 +36,22 @@
 
         function setId($id)
         {
-            // $this->id = (int) $id;
+            $this->id = (int) $id;
         }
 
         function setName($new_name)
         {
-            // $this->name = (string) $new_name;
+            $this->name = (string) $new_name;
         }
 
         function setContactInfo($new_contact_info)
         {
-            // $this->contact_info = (string) $new_contact_info;
+            $this->contact_info = (string) $new_contact_info;
         }
 
         function setStylistId($new_stylist_id)
         {
-            // $this->stylist_id = (int) $new_stylist_id;
+            $this->stylist_id = (int) $new_stylist_id;
         }
 
         function save()
