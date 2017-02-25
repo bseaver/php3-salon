@@ -80,7 +80,13 @@
     });
 
     $app->post("/post/client", function() use ($app) {
-        return 'To Do';
+        $stylist_id = $_POST['client_stylist_id'];
+        $stylist = Stylist::findById($stylist_id);
+        $client = new Client($_POST['client_name'], $_POST['client_contact_info'], $stylist_id);
+        $client->save();
+        return $app['twig']->render('clients.html.twig',
+            array('edit_client' => new Client, 'clients' => Client::getAll($stylist_id), 'stylist' => $stylist)
+        );
     });
 
     $app->get("/get/client/{id}/edit", function($id) use ($app) {
