@@ -90,7 +90,11 @@
     });
 
     $app->get("/get/client/{id}/edit", function($id) use ($app) {
-        return 'To Do';
+        $client = Client::findById($id);
+        $stylist = Stylist::findById($client->getStylistId());
+        return $app['twig']->render('clients.html.twig',
+            array('edit_client' => $client, 'clients' => Client::getAll($stylist_id), 'stylist' => $stylist)
+        );
     });
 
     $app->delete("/delete/clients", function() use ($app) {
@@ -102,7 +106,12 @@
     });
 
     $app->patch("/patch/client/{id}", function($id) use ($app) {
-        return 'To Do';
+        $client = Client::findById($id);
+        $client->update($_POST['client_name'], $_POST['client_contact_info'], $_POST['client_stylist_id']);
+        $stylist = Stylist::findById($client->getStylistId());
+        return $app['twig']->render('clients.html.twig',
+            array('edit_client' => new Client, 'clients' => Client::getAll($stylist_id), 'stylist' => $stylist)
+        );
     });
 
     $app->delete("/delete/client/{id}", function($id) use ($app) {
