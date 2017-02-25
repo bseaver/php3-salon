@@ -97,7 +97,7 @@
         $stylist = Stylist::findById($client->getStylistId());
 
         return $app['twig']->render('clients.html.twig',
-            array('edit_client' => $client, 'clients' => Client::getAll($stylist_id), 'stylist' => $stylist)
+            array('edit_client' => $client, 'clients' => Client::getAll($client->getStylistId()), 'stylist' => $stylist)
         );
     });
 
@@ -124,7 +124,7 @@
         $stylist = Stylist::findById($client->getStylistId());
 
         return $app['twig']->render('clients.html.twig',
-            array('edit_client' => new Client, 'clients' => Client::getAll($stylist_id), 'stylist' => $stylist)
+            array('edit_client' => new Client, 'clients' => Client::getAll($client->getStylistId()), 'stylist' => $stylist)
         );
     });
 
@@ -134,7 +134,7 @@
         $client->delete();
 
         return $app['twig']->render('clients.html.twig',
-            array('edit_client' => new Client, 'clients' => Client::getAll($stylist_id), 'stylist' => $stylist)
+            array('edit_client' => new Client, 'clients' => Client::getAll($stylist->getId()), 'stylist' => $stylist)
         );
     });
 
