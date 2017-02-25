@@ -18,6 +18,8 @@
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
 
+    // Stylist routes
+
     $app->get("/", function() use ($app) {
         return $app['twig']->render(
             'stylists.html.twig',
@@ -73,7 +75,33 @@
         );
     });
 
+    // Client routes
+
     $app->get("/get/clients/{stylist_id}", function($stylist_id) use ($app) {
+        return 'To Do';
+    });
+
+    $app->post("/post/client", function() use ($app) {
+        return 'To Do';
+    });
+
+    $app->get("/get/client/{id}/edit", function($id) use ($app) {
+        return 'To Do';
+    });
+
+    $app->delete("/delete/clients", function() use ($app) {
+        return 'To Do';
+    });
+
+    $app->delete("/delete/stylist/clients/{stylist_id}", function($stylist_id) use ($app) {
+        return 'To Do';
+    });
+
+    $app->patch("/patch/client/{id}", function($id) use ($app) {
+        return 'To Do';
+    });
+
+    $app->delete("/delete/client/{id}", function($id) use ($app) {
         return 'To Do';
     });
 
