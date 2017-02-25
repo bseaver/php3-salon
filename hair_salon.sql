@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.10
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 24, 2017 at 05:52 PM
--- Server version: 5.5.42
--- PHP Version: 5.6.10
+-- Generation Time: Feb 24, 2017 at 09:15 PM
+-- Server version: 5.6.35
+-- PHP Version: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -30,11 +30,27 @@ USE `hair_salon`;
 
 DROP TABLE IF EXISTS `clients`;
 CREATE TABLE `clients` (
-  `id` bigint(20) unsigned NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `contact_info` varchar(255) DEFAULT NULL,
   `stylist_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`id`, `name`, `contact_info`, `stylist_id`) VALUES
+(8, 'Tammy Smith', '666-1212', 3),
+(9, 'John Smith', '666-1234', 3),
+(10, 'Mike Williams', '555-2323', 3),
+(11, 'Florence Nightingale', '555-4242', 3),
+(12, 'Lesley Jakes', '666-3434', 4),
+(13, 'Wilma Flintstone', '111-9999', 4),
+(14, 'Betty Rubble', '111-8989', 4),
+(15, 'Hope Springs', '555-7770', 5),
+(16, 'Marsha Little', '666-2121', 5),
+(17, 'Marty O\'Henry', '333-5656', 5);
 
 -- --------------------------------------------------------
 
@@ -44,10 +60,19 @@ CREATE TABLE `clients` (
 
 DROP TABLE IF EXISTS `stylists`;
 CREATE TABLE `stylists` (
-  `id` bigint(20) unsigned NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `contact_info` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stylists`
+--
+
+INSERT INTO `stylists` (`id`, `name`, `contact_info`) VALUES
+(3, 'Sugar Jones', '222-1234'),
+(4, 'Joe Marks', '333-1212'),
+(5, 'Jane Star', '555-3232');
 
 --
 -- Indexes for dumped tables
@@ -75,12 +100,12 @@ ALTER TABLE `stylists`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `stylists`
 --
 ALTER TABLE `stylists`
-  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
