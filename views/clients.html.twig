@@ -83,19 +83,22 @@
         <button type='submit' class='btn btn-info'>Submit</button>
     </form>
 
-    <br>
-    <br>
-    <br>
-    <form action='/delete/stylist/clients/{{ stylist.getId }}' method='post'>
-        <input name='_method' value='delete' hidden>
-        <button type='submit' class='btn btn-xs btn-danger'
-            {% if edit_client.getId %}
-                disabled
-            {% endif %}
-        >
-            Delete Clients for this Stylist --- Warning!
-        </button>
-    </form>
+    {% if clients is not empty %}
+        <br>
+        <br>
+        <br>
+        <form action='/delete/stylist/clients/{{ stylist.getId }}' method='post'>
+            <input name='_method' value='delete' hidden>
+            <button type='submit' class='btn btn-xs btn-danger'
+                {% if edit_client.getId %}
+                    disabled
+                {% endif %}
+            >
+                Delete Clients for this Stylist --- Warning!
+            </button>
+        </form>
+    {% endif %}
+    
     <br>
     <br>
     <br>
