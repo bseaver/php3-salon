@@ -151,6 +151,29 @@ class ClientTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    function test_Client_delete()
+    {
+        // Arrange
+        $stylist1 = new Stylist('James', '555-1212');
+        $stylist2 = new Stylist('Alison', '555-1212');
+        $stylist1->save();
+        $stylist2->save();
+
+        $client1 = new Client('Tony','444-1111', $stylist1->getId());
+        $client2 = new Client('Mike','555-1111', $stylist2->getId());
+        $client3 = new Client('Francy','555-2222', $stylist1->getId());
+
+        $client1->save();
+        $client2->save();
+        $client3->save();
+
+        // Act
+        $client1->delete();
+
+        // Assert
+        $this->assertEquals([$client2, $client3], Client::getAll());
+    }
+
 
 
 }
