@@ -132,10 +132,10 @@
 
         function delete()
         {
-            // $GLOBALS['DB']->exec(
-            //     "DELETE FROM clients
-            //         WHERE id = {$this->getId()};"
-            // );
+            $GLOBALS['DB']->exec(
+                "DELETE FROM clients
+                    WHERE id = {$this->getId()};"
+            );
         }
     }
 ?>
