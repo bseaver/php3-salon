@@ -2,6 +2,7 @@
     date_default_timezone_set('America/Los_Angeles');
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Stylist.php";
+    require_once __DIR__."/../src/Client.php";
 
     $app = new Silex\Application();
     $app['debug'] = true;
@@ -21,8 +22,7 @@
     // Stylist routes
 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render(
-            'stylists.html.twig',
+        return $app['twig']->render('stylists.html.twig',
             array('edit_stylist' => new Stylist, 'stylists' => Stylist::getAll())
         );
     });
@@ -31,8 +31,7 @@
         $stylist = new Stylist($_POST['stylist_name'], $_POST['stylist_contact_info']);
         $stylist->save();
 
-        return $app['twig']->render(
-            'stylists.html.twig',
+        return $app['twig']->render('stylists.html.twig',
             array('edit_stylist' => new Stylist, 'stylists' => Stylist::getAll())
         );
     });
@@ -40,8 +39,7 @@
     $app->get("/get/stylist/{id}/edit", function($id) use ($app) {
         $stylist = Stylist::findById($id);
 
-        return $app['twig']->render(
-            'stylists.html.twig',
+        return $app['twig']->render('stylists.html.twig',
             array('edit_stylist' => $stylist, 'stylists' => Stylist::getAll())
         );
     });
@@ -50,8 +48,7 @@
         $stylist = Stylist::findById($id);
         $stylist->update($_POST['stylist_name'], $_POST['stylist_contact_info']);
 
-        return $app['twig']->render(
-            'stylists.html.twig',
+        return $app['twig']->render('stylists.html.twig',
             array('edit_stylist' => new Stylist, 'stylists' => Stylist::getAll())
         );
     });
@@ -60,8 +57,7 @@
         $stylist = Stylist::findById($id);
         $stylist->delete();
 
-        return $app['twig']->render(
-            'stylists.html.twig',
+        return $app['twig']->render('stylists.html.twig',
             array('edit_stylist' => new Stylist, 'stylists' => Stylist::getAll())
         );
     });
@@ -69,8 +65,7 @@
     $app->delete("/delete/stylists", function() use ($app) {
         Stylist::deleteAll();
 
-        return $app['twig']->render(
-            'stylists.html.twig',
+        return $app['twig']->render('stylists.html.twig',
             array('edit_stylist' => new Stylist, 'stylists' => Stylist::getAll())
         );
     });
@@ -78,7 +73,10 @@
     // Client routes
 
     $app->get("/get/clients/{stylist_id}", function($stylist_id) use ($app) {
-        return 'To Do';
+        $stylist = Stylist::findById($stylist_id);
+        return $app['twig']->render('clients.html.twig',
+            array('edit_client' => new Client, 'clients' => Client::getAll($stylist_id), 'stylist' => $stylist)
+        );
     });
 
     $app->post("/post/client", function() use ($app) {

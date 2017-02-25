@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block page %}
-    <h3>Clients for {{ stylist.getName }}:</h3>
+    <h3>Clients for {{ stylist.getName }} ({{ stylist.getContactInfo }}):</h3>
     <br>
 
     {% if clients is not empty %}
@@ -58,8 +58,9 @@
         {% endif %}
         method='post'
     >
+        <input name='client_stylist_id' value='{{ stylist.getId }}' hidden>
 
-        {% if edit_stylist.getId %}
+        {% if edit_client.getId %}
             <input name='_method' value='patch' hidden>
             <input name='client_id' value='{{ edit_client.getId }}' hidden>
         {% endif %}
@@ -85,10 +86,10 @@
     <br>
     <br>
     <br>
-    <form action='/delete/stylist/clients/{stylist_id}' method='post'>
+    <form action='/delete/stylist/clients/{{ stylist.getId }}' method='post'>
         <input name='_method' value='delete' hidden>
         <button type='submit' class='btn btn-xs btn-danger'
-            {% if edit_stylist.getId %}
+            {% if edit_client.getId %}
                 disabled
             {% endif %}
         >
@@ -101,7 +102,7 @@
     <form action='/delete/clients' method='post'>
         <input name='_method' value='delete' hidden>
         <button type='submit' class='btn btn-xs btn-danger'
-            {% if edit_stylist.getId %}
+            {% if edit_client.getId %}
                 disabled
             {% endif %}
         >
