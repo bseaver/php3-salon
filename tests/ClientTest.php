@@ -129,6 +129,28 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($client2, $found_client);
     }
 
+    function test_Client_update()
+    {
+        // Arrange
+        $stylist1 = new Stylist('James', '555-1212');
+        $stylist1->save();
+        $stylist2 = new Stylist('Tony', '555-0000');
+        $stylist2->save();
+        $client1 = new Client('Jen', '555-3333', $stylist1->getId());
+        $client1->save();
+
+        // Act
+        $new_stylist_id = $stylist2->getId();
+        $client1->update('Jennifer', '503-555-3333', $new_stylist_id);
+        $found_client = Client::findById($client1->getId());
+
+        // Assert
+        $this->assertEquals(
+            'Jennifer-503-555-3333-' . $new_stylist_id,
+            $found_client->getName() . '-' . $found_client->getContactInfo() . '-' . $found_client->getStylistId()
+        );
+    }
+
 
 
 }
