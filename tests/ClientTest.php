@@ -24,18 +24,18 @@ class ClientTest extends PHPUnit_Framework_TestCase
     function test_Client_get_set_construct()
     {
         // Arrange
-        $stylist1 = new Client('James', '555-1212', 1);
+        $client1 = new Client('James', '555-1212', 1);
 
         // Act
-        $stylist2 = new Client();
-        $stylist2->setName($stylist1->getName());
-        $stylist2->setContactInfo($stylist1->getContactInfo());
-        $stylist2->setStylistId($stylist1->getStylistId());
+        $client2 = new Client();
+        $client2->setName($client1->getName());
+        $client2->setContactInfo($client1->getContactInfo());
+        $client2->setStylistId($client1->getStylistId());
 
         // Assert
         $this->assertEquals(
             'James-555-1212-1',
-            $stylist2->getName() . '-' . $stylist2->getContactInfo() . '-' . $stylist2->getStylistId()
+            $client2->getName() . '-' . $client2->getContactInfo() . '-' . $client2->getStylistId()
         );
     }
 
