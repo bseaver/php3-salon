@@ -98,11 +98,18 @@
     });
 
     $app->delete("/delete/clients", function() use ($app) {
-        return 'To Do';
+        Client::deleteAll();
+        return $app['twig']->render('stylists.html.twig',
+            array('edit_stylist' => new Stylist, 'stylists' => Stylist::getAll())
+        );
     });
 
     $app->delete("/delete/stylist/clients/{stylist_id}", function($stylist_id) use ($app) {
-        return 'To Do';
+        Client::deleteAllByStylist($stylist_id);
+        $stylist = Stylist::findById($stylist_id);
+        return $app['twig']->render('clients.html.twig',
+            array('edit_client' => new Client, 'clients' => Client::getAll($stylist_id), 'stylist' => $stylist)
+        );
     });
 
     $app->patch("/patch/client/{id}", function($id) use ($app) {
