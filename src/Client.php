@@ -117,16 +117,17 @@
 
         function update($new_name, $new_contact_info, $new_stylist_id)
         {
-            // $this->setName(addslashes($new_name));
-            // $this->setContactInfo(addslashes($new_contact_info));
-            //
-            // $GLOBALS['DB']->exec(
-            //     "UPDATE stylists SET
-            //         name = '{$this->getName()}',
-            //         contact_info = '{$this->getContactInfo()}',
-            //         stylist_id = {$this->getStylistId()}
-            //     WHERE id = {$this->getId()};"
-            // );
+            $this->setName(addslashes($new_name));
+            $this->setContactInfo(addslashes($new_contact_info));
+            $this->setStylistId($new_stylist_id);
+
+            $GLOBALS['DB']->exec(
+                "UPDATE clients SET
+                    name = '{$this->getName()}',
+                    contact_info = '{$this->getContactInfo()}',
+                    stylist_id = {$this->getStylistId()}
+                WHERE id = {$this->getId()};"
+            );
         }
 
         function delete()
