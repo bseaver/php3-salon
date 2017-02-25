@@ -115,7 +115,12 @@
     });
 
     $app->delete("/delete/client/{id}", function($id) use ($app) {
-        return 'To Do';
+        $client = Client::findById($id);
+        $stylist = Stylist::findById($client->getStylistId());
+        $client->delete();
+        return $app['twig']->render('clients.html.twig',
+            array('edit_client' => new Client, 'clients' => Client::getAll($stylist_id), 'stylist' => $stylist)
+        );
     });
 
     return $app;
