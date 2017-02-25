@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block page %}
+    <h3>Clients for {{ stylist.getName }}:</h3>
+    <br>
+
+    {% if clients is not empty %}
+        <table class="table table-striped">
+            <thead>
+                <th>Name</th>
+                <th>Contact Info</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </thead>
+
+            <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td>{{ client.getName }}</td>
+                        <td>{{ client.getContactInfo }}</td>
+                        <td>
+                            <form action='/get/client/{{ client.getId }}/edit' method='get'>
+                                <button type='submit' class='btn btn-xs btn-info'>Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action='/delete/client/{{ client.getId }}' method='post'>
+                                <input name='_method' value='delete' hidden>
+                                <button type='submit' class='btn btn-xs btn-warning'
+                                    {% if edit_client.getId %}
+                                        disabled
+                                    {% endif %}
+                                >
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <br>
+    <br>
+
+    {% if edit_client.getId %}
+        <h3>Edit Existing Client:</h3>
+    {% else %}
+        <h3>Enter New Client:</h3>
+    {% endif %}
+
+    <form
+        {% if edit_client.getId %}
+            action='/patch/client/{{ edit_client.getId }}'
+        {% else %}
+            action='/post/client'
+        {% endif %}
+        method='post'
+    >
+
+        {% if edit_stylist.getId %}
+            <input name='_method' value='patch' hidden>
+            <input name='client_id' value='{{ edit_client.getId }}' hidden>
+        {% endif %}
+
+        <div class='form-group'>
+            <label for='client_name'>Name of Client</label>
+            <input
+                required type='text' name='client_name' class='form-control'
+                value='{{ edit_client.getName }}'
+            >
+        </div>
+
+        <div class='form-group'>
+            <label for='client_contact_info'>Contact Info</label>
+            <input
+                required type='text' name='client_contact_info' class='form-control'
+                value='{{ edit_client.getContactInfo }}'
+            >
+        </div>
+        <button type='submit' class='btn btn-info'>Submit</button>
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <form action='/delete/stylist/clients/{stylist_id}' method='post'>
+        <input name='_method' value='delete' hidden>
+        <button type='submit' class='btn btn-xs btn-danger'
+            {% if edit_stylist.getId %}
+                disabled
+            {% endif %}
+        >
+            Delete Clients for this Stylist --- Warning!
+        </button>
+    </form>
+    <br>
+    <br>
+    <br>
+    <form action='/delete/clients' method='post'>
+        <input name='_method' value='delete' hidden>
+        <button type='submit' class='btn btn-xs btn-danger'
+            {% if edit_stylist.getId %}
+                disabled
+            {% endif %}
+        >
+            Delete All Clients for All Stylists --- Warning!
+        </button>
+    </form>
+{% endblock %}
